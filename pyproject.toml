@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "coursework-5"
+version = "0.1.0"
+description = "SkyPro coursework #5"
+authors = ["Andrew Zaiko <andrewzaiko@gmail.com>"]
+readme = "README.md"
+packages = [{include = "coursework_5"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^2.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
