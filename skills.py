@@ -50,6 +50,9 @@ class Skill(ABC):
 
 
 class FuryPunch(Skill):
+    """
+    Класс яростный пинок
+    """
     name = ...
     stamina = ...
     damage = ...
@@ -63,6 +66,9 @@ class FuryPunch(Skill):
         pass
 
 class HardShot(Skill):
+    """
+    Класс меткий выстрел
+    """
     name = ...
     stamina = ...
     damage = ...
