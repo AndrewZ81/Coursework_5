@@ -10,7 +10,7 @@ class UnitClass:
     attack: float  # Сила атаки
     stamina: float  # Текущая выносливость
     armor: float  # Показатель брони
-    skill: Skill  # Способность героя
+    skill: Skill  # Умение героя
 
 
 WarriorClass = UnitClass(...)  # Экземпляр Воин
