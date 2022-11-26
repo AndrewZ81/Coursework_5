@@ -12,11 +12,8 @@ class Skill(ABC):
     """
     Базовый класс умения
     """
-    name: str  #
-    stamina: float  #
-    damage: float  #
-    user: None  #
-    target: = None  #
+    user: None  #  Игрок
+    target: None  #  Противник
 
     @property
     @abstractmethod
