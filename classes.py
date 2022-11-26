@@ -1,17 +1,22 @@
-# from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
-class Area:
-    """Создаёт игровое поле по шаблонам Синглтон и Моносостояние"""
-    __instance = None
-    __shared_fields = {
+@dataclass
+class UnitClass:
+    """Базовый класс героя"""
+    name: str
+    max_health: float
+    max_stamina: float
+    attack: float
+    stamina: float
+    armor: float
+    skill: Skill
 
-    }
 
-    def __new__(cls, *args, **kwargs):
-        if cls.__instance is None:
-            cls.__instance = super().__new__(cls, *args, **kwargs)
-        return cls.__instance
+WarriorClass = UnitClass(...)  # Создаём экземпляр Воин
+ThiefClass = UnitClass(...)  # Создаём экземпляр Вор
 
-    def __init__(self):
-        self.__dict__ = self.__shared_fields
+unit_classes = {
+    ThiefClass.name: ThiefClass,
+    WarriorClass.name: WarriorClass
+}
