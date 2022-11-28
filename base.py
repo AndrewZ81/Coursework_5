@@ -21,21 +21,34 @@ class Arena(metaclass=BaseSingleton):
         # TODO НАЧАЛО ИГРЫ -> None
         # TODO присваиваем экземпляру класса аттрибуты "игрок" и "противник"
         # TODO а также выставляем True для свойства "началась ли игра"
-        pass
+        self.player = player
+        self.enemy = enemy
+        self.game_is_running = True
 
-    def _check_players_hp(self):
+    def _check_players_hp(self) -> str:
         # TODO ПРОВЕРКА ЗДОРОВЬЯ ИГРОКА И ВРАГА
         # TODO проверка здоровья игрока и врага и возвращение результата строкой:
         # TODO может быть три результата:
         # TODO Игрок проиграл битву, Игрок выиграл битву, Ничья и сохраняем его в аттрибуте (self.battle_result)
         # TODO если Здоровья игроков в порядке то ничего не происходит
-        pass
+
+        if self.player.hp < 0 and self.enemy.hp < 0:
+            self.battle_result = "Ничья"
+            return self._end_game()
+        elif self.player.hp < 0:
+            self.battle_result = "Игрок проиграл битву"
+            return self._end_game()
+        elif self.player.hp > 0 and self.enemy.hp < 0:
+            self.battle_result = "Игрок выиграл битву"
+            return self._end_game()
 
     def _stamina_regeneration(self):
         # TODO регенерация здоровья и стамины для игрока и врага за ход
         # TODO в этом методе к количеству стамины игрока и врага прибавляется константное значение.
-        # TODO главное чтобы оно не привысило максимальные значения (используйте if)
-        pass
+        # TODO главное, чтобы оно не превысило максимальные значения (используйте if)
+
+        units = (self.player, self.enemy)
+
 
     def next_turn(self):
         # TODO СЛЕДУЮЩИЙ ХОД -> return result | return self.enemy.hit(self.player)
