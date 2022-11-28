@@ -11,7 +11,7 @@ class Armor:
     """
     Класс Броня
     """
-    id: str  # Порядковый номер брони
+    id: int  # Порядковый номер брони
     name: str  # Название брони
     defence: float  # Очки защиты
     stamina_per_turn: float  # Количество затрачиваемой выносливости за ход
@@ -22,7 +22,7 @@ class Weapon:
     """
     Класс Оружие
     """
-    id: str  # Порядковый номер оружия
+    id: int  # Порядковый номер оружия
     name: str  # Название оружия
     min_damage: float  # Минимальный урон
     max_damage: float  # Максимальный урон
@@ -82,9 +82,9 @@ class Equipment:
 
     @staticmethod
     def _get_equipment_data() -> EquipmentData:
-        with open("./data/equipment.json") as file:
-            equipment_file = file.read()
-            data = json.loads(equipment_file)
+        equipment_file = open("./data/equipment.json")
+        data = json.load(equipment_file)
+        equipment_file.close()
         equipment_schema = marshmallow_dataclass.class_schema(EquipmentData)
         try:
             return equipment_schema().load(data)

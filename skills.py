@@ -7,13 +7,12 @@ if TYPE_CHECKING:
     from unit import BaseUnit
 
 
-@dataclass
 class Skill(ABC):
     """
     Базовый класс умения
     """
-    user: None  # Игрок
-    target: None  # Противник
+    user = None  # Игрок
+    target = None  # Противник
 
     @property
     @abstractmethod
