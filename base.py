@@ -48,17 +48,30 @@ class Arena(metaclass=BaseSingleton):
         # TODO главное, чтобы оно не превысило максимальные значения (используйте if)
 
         units = (self.player, self.enemy)
+        for i in units:
+            if i.stamina + self.STAMINA_PER_ROUND > i.unit_class.max_stamina:
+                i.stamina = i.unit_class.max_stamina
+            i.stamina += self.STAMINA_PER_ROUND
 
 
     def next_turn(self):
         # TODO СЛЕДУЮЩИЙ ХОД -> return result | return self.enemy.hit(self.player)
-        # TODO срабатывает когда игроп пропускает ход или когда игрок наносит удар.
-        # TODO создаем поле result и проверяем что вернется в результате функции self._check_players_hp
+        # TODO срабатывает, когда игрок пропускает ход или когда игрок наносит удар.
+        # TODO создаем поле result и проверяем, что вернется в результате функции self._check_players_hp
         # TODO если result -> возвращаем его
         # TODO если же результата пока нет и после завершения хода игра продолжается,
-        # TODO тогда запускаем процесс регенирации стамины и здоровья для игроков (self._stamina_regeneration)
+        # TODO тогда запускаем процесс регенерации стамины и здоровья для игроков (self._stamina_regeneration)
         # TODO и вызываем функцию self.enemy.hit(self.player) - ответный удар врага
-        pass
+
+        result = self._check_players_hp()
+
+        if result is not None:
+            return result
+
+        if self.game_is_running:
+            self._stamina_regeneration()
+            return self.enemy.hit(self.player)
+
 
     def _end_game(self):
         # TODO КНОПКА ЗАВЕРШЕНИЕ ИГРЫ - > return result: str
