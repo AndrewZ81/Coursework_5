@@ -38,10 +38,10 @@ class Arena(metaclass=BaseSingleton):
             self.battle_result = "Ничья"
             return self._end_game()
         elif self.player.hp < 0:
-            self.battle_result = "Игрок проиграл битву"
+            self.battle_result = f"{self.enemy.name} выиграл(а) битву"
             return self._end_game()
         elif self.player.hp > 0 and self.enemy.hp < 0:
-            self.battle_result = "Игрок выиграл битву"
+            self.battle_result = f"{self.player.name} выиграл(а) битву"
             return self._end_game()
         return None
 

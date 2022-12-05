@@ -95,7 +95,8 @@ class BaseUnit(ABC):
         и уже эта функция вернет нам строку, которая характеризует выполнение умения
         """
         if self._is_skill_used:
-            return "Навык использован"
+            return "Навык использован." \
+                   ""
         self._is_skill_used = True
         return self.unit_class.skill.use(user=self, target=target)
 
@@ -111,16 +112,19 @@ class PlayerUnit(BaseUnit):
         """
         if self.stamina < self.weapon.stamina_per_hit:
             return f"{self.name} попытался использовать {self.weapon.name}," \
-                   f" но у него не хватило выносливости."
+                   f" но у него не хватило выносливости." \
+                   f""
 
         damage = self._count_damage(target)
 
         if damage > 0:
             return f"{self.name}, используя {self.weapon.name}, " \
-                   f"пробивает {target.armor.name} соперника и наносит {damage} урона."
+                   f"пробивает {target.armor.name} соперника и наносит {damage} урона." \
+                   f""
 
         return f"{self.name}, используя {self.weapon.name}, " \
-               f"наносит удар, но {target.armor.name} cоперника его останавливает."
+               f"наносит удар, но {target.armor.name} cоперника его останавливает." \
+               f""
 
 
 class EnemyUnit(BaseUnit):
@@ -139,13 +143,16 @@ class EnemyUnit(BaseUnit):
 
         if self.stamina < self.weapon.stamina_per_hit:
             return f"{self.name} попытался использовать {self.weapon.name}," \
-                   f" но у него не хватило выносливости."
+                   f" но у него не хватило выносливости." \
+                   f""
 
         damage = self._count_damage(target)
 
         if damage > 0:
             return f"{self.name}, используя {self.weapon.name}, " \
-                   f"пробивает {target.armor.name} и наносит Вам {damage} урона."
+                   f"пробивает {target.armor.name} и наносит Вам {damage} урона." \
+                   f""
 
         return f"{self.name}, используя {self.weapon.name}, " \
-               f"наносит удар, но Ваш(а) {target.armor.name} его останавливает."
+               f"наносит удар, но Ваш(а) {target.armor.name} его останавливает." \
+               f""
