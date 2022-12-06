@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from equipment import Equipment, Weapon, Armor
+from equipment import Weapon, Armor
 from classes import UnitClass
 from random import randint
 from typing import Optional
@@ -95,8 +95,7 @@ class BaseUnit(ABC):
         и уже эта функция вернет нам строку, которая характеризует выполнение умения
         """
         if self._is_skill_used:
-            return "Навык использован." \
-                   ""
+            return "Навык использован."
         self._is_skill_used = True
         return self.unit_class.skill.use(user=self, target=target)
 
@@ -111,20 +110,17 @@ class PlayerUnit(BaseUnit):
         а также возвращается результат в виде строки
         """
         if self.stamina < self.weapon.stamina_per_hit:
-            return f"{self.name} попытался использовать {self.weapon.name}," \
-                   f" но у него не хватило выносливости." \
-                   f""
+            return f"<p>{self.name} попытался использовать {self.weapon.name}," \
+                   f" но у него не хватило выносливости.</p>"
 
         damage = self._count_damage(target)
 
         if damage > 0:
-            return f"{self.name}, используя {self.weapon.name}, " \
-                   f"пробивает {target.armor.name} соперника и наносит {damage} урона." \
-                   f""
+            return f"<p>{self.name}, используя {self.weapon.name}, " \
+                   f"пробивает {target.armor.name} соперника и наносит {damage} урона.</p>"
 
-        return f"{self.name}, используя {self.weapon.name}, " \
-               f"наносит удар, но {target.armor.name} cоперника его останавливает." \
-               f""
+        return f"<p>{self.name}, используя {self.weapon.name}, " \
+               f"наносит удар, но {target.armor.name} cоперника его останавливает.</p>"
 
 
 class EnemyUnit(BaseUnit):
@@ -142,17 +138,14 @@ class EnemyUnit(BaseUnit):
             return self.use_skill(target)
 
         if self.stamina < self.weapon.stamina_per_hit:
-            return f"{self.name} попытался использовать {self.weapon.name}," \
-                   f" но у него не хватило выносливости." \
-                   f""
+            return f"<p>{self.name} попытался использовать {self.weapon.name}," \
+                   f" но у него не хватило выносливости.</p>"
 
         damage = self._count_damage(target)
 
         if damage > 0:
-            return f"{self.name}, используя {self.weapon.name}, " \
-                   f"пробивает {target.armor.name} и наносит Вам {damage} урона." \
-                   f""
+            return f"<p>{self.name}, используя {self.weapon.name}, " \
+                   f"пробивает {target.armor.name} и наносит Вам {damage} урона.</p>"
 
-        return f"{self.name}, используя {self.weapon.name}, " \
-               f"наносит удар, но Ваш(а) {target.armor.name} его останавливает." \
-               f""
+        return f"<p>{self.name}, используя {self.weapon.name}, " \
+               f"наносит удар, но Ваш(а) {target.armor.name} его останавливает.</p>"
